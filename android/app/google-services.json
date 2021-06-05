@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "163145278658",
+    "project_id": "pardakht-parto",
+    "storage_bucket": "pardakht-parto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163145278658:android:a8b25188aead07e1ed875b",
+        "android_client_info": {
+          "package_name": "com.app.partopay.pardakht_parto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163145278658-p6gr7p828cg2e8es2b2tca8umha9fh5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBScIiwwdo0xP39N19_EmF4N-btixP__B8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163145278658-p6gr7p828cg2e8es2b2tca8umha9fh5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
