@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pardakht_parto/custom_widgets/cust_alert_dialog.dart';
+import 'package:pardakht_parto/custom_widgets/cust_button.dart';
 import 'package:pardakht_parto/pages/main_page.dart';
 import 'package:pardakht_parto/pages/profile.dart';
 import 'package:pardakht_parto/ui/cust_colors.dart';
@@ -14,6 +15,13 @@ import '../main.dart';
 import 'TopWallet.dart';
 // Crude counter to make messages unique
 int _messageCount = 0;
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  //await Firebase.initializeApp();
+  print('Handling a background message BIIIIIIIIIIIIIIIIIIIIIIGGGGGGGGGGGGGGGGGG ${message.messageId}');
+}
+
 
 /// The API endpoint here accepts a raw FCM payload for demonstration purposes.
 String constructFCMPayload(String token) {
@@ -45,7 +53,8 @@ class _MasterTemplateState extends State<MasterTemplateWithoutFooter> with Ticke
   @override
   void initState() {
     super.initState();
-    FirebaseMessaging.instance
+
+/*    FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage message) {
       if (message != null) {
@@ -85,7 +94,8 @@ class _MasterTemplateState extends State<MasterTemplateWithoutFooter> with Ticke
         subContent: message.toString(),
       ),);
 
-    });
+    });*/
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
   @override

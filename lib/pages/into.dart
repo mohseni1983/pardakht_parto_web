@@ -108,12 +108,16 @@ class _IntroPageState extends State<IntroPage> {
       _version='${_info.version}.${_info.buildNumber}';
     });
   }
+  FirebaseMessaging messaging;
 
 
   @override
   void initState() {
+
     // TODO: implement initState
     super.initState();
+
+
    /* initPlatformState();*/
     getInfo();
     isDeviceRoot().then((rooted) {
@@ -160,7 +164,7 @@ class _IntroPageState extends State<IntroPage> {
               },
             ).then((value) => exit(0));
           } else{
-            isInternetConnected().then((connected) {
+            isInternetConnected().then((connected) async {
               if(!connected){
                 showDialog<void>(
                   context: context,
@@ -186,9 +190,19 @@ class _IntroPageState extends State<IntroPage> {
                 //_firebaseMessaging.requestNotificationPermissions();
               //  _firebaseMessaging.getToken().then((value) {
               //    debugPrint('Token FCB=$value');
-                  _prefs.then((x) {
-                    x.setString('fcmKey', 'debug');
-                  });
+
+/*
+           FirebaseMessaging.instance.getToken().then((res){
+             print(res);
+             _prefs.then((x) {
+               x.setString('fcmKey', res);
+             });
+           } );
+*/
+                //var tt=await messaging.getToken();
+
+
+
           //      });
                 auth.checkAuth().then((value) async {
                   // Future<SharedPreferences> _prefs=SharedPreferences.getInstance();

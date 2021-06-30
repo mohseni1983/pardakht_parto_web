@@ -418,7 +418,7 @@ class _ReciptPageState extends State<ReciptPage> {
                         label: 'اشتراک گذاری متن',
                         onClick: (){
                           var _msg='اپلیکیشن پرداخت پرتو' +'\r\n';
-                          _msg+='نوع تراکنش: ${getTransactionType(int.parse(_recipt.requestType)).name}';
+                          _msg+='نوع تراکنش: ${getTransactionType(int.parse(_recipt.requestType)).name}'+'\r\n';;
                           if(int.parse(_recipt.requestType)==0)
                            _msg+='شماره همراه: ${_recipt.cellNumber}'+'\r\n';;
                           if(_recipt.billGroup!=0)

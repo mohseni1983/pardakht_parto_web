@@ -21,6 +21,7 @@ import 'package:pardakht_parto/pages/profile.dart';
 import 'package:pardakht_parto/pages/recipt.dart';
 import 'package:pardakht_parto/pages/registeration.dart';
 import 'package:pardakht_parto/pages/test.dart';
+import 'package:pardakht_parto/pages/wallet.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links2/uni_links.dart';
@@ -28,9 +29,11 @@ import 'package:uni_links2/uni_links.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-  print('Handling a background message ${message.messageId}');
+  //await Firebase.initializeApp();
+  print('Handling a background message ${message.notification.body}');
+  //Navigator.of(context).p
 }
+
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel', // id
@@ -42,13 +45,26 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 void main() async {
+
+  String token_fcm='';
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  await Firebase.initializeApp();
 
+  await Firebase.initializeApp().timeout(Duration(seconds: 30));
+  /*inal FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   // Set the background messaging handler early on, as a named top-level function
+  try {
+    _firebaseMessaging
+        .getToken()
+        .then((value) => debugPrint('This is token: ${value}'));
+  } catch (e) {
+    debugPrint('Error=====> ${e.toString()}');
+  }*/
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+
+
   /// Create an Android Notification Channel.
   ///
   /// We use this channel in the `AndroidManifest.xml` file to override the
@@ -65,11 +81,25 @@ void main() async {
     badge: true,
     sound: true,
   );
+  try{
+    String _token=await FirebaseMessaging.instance.getToken();
+    //debugPrint('Toooooooooooooooooooooooooooooooooken::::::::::::::::::::: $_token');
+    SharedPreferences.getInstance().then((value) {
+      value.setString('fcmKey', _token);
+    });
+
+  }catch (e){
+    debugPrint('EEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO::::$e');
+  }
+
+
+
 
   await SentryFlutter.init(
           (options) {
         options.dsn = 'https://87a232be89fe4af1beb7a10c5be27cef@o502350.ingest.sentry.io/5635538';
       },
+
   appRunner: () {
         runApp(MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -128,19 +158,15 @@ void main() async {
             '/bill':(context)=>BillsPage(),
             '/charge': (context)=>ChargeWizardPage(),
             '/internet':(context)=>InternetPackagePage(),
-            '/wallet':(context)=>ProfilePage(),
+            '/wallet':(context)=>WalletPage(),
             '/profile':(context)=>ProfilePage(),
             '/donation':(context)=>DonationPage(),
             '/notifications':(context)=>NotificationsPage(),
             //ReciptPage.routeName:(context)=>ReciptPage(key: Key(Random(10000).toString()),)
             '/test':(context)=>TestPage()
           },
-
-
           initialRoute:
           '/intro',
-
-
           // home:value? new MainPage():new RegisterationPage(),
         )
         );

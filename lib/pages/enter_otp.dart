@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:package_info/package_info.dart';
 import 'package:pardakht_parto/classes/global_variables.dart' as globalVars;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
@@ -17,6 +18,9 @@ import 'package:pardakht_parto/components/reg_page_template.dart';
 
 //import '../push_notifications.dart';
 class EnterOTP extends StatefulWidget {
+
+
+  const EnterOTP({Key key, }) : super(key: key);
   @override
   _EnterOTPState createState() => _EnterOTPState();
 }
@@ -36,6 +40,7 @@ class _EnterOTPState extends State<EnterOTP> {
   bool _progress=false;
   bool _countEnded=false;
   String _fdm='';
+  String _version='0';
 
   String _countDown='';
   OTPCountDown _otpCountDown;
@@ -59,7 +64,12 @@ class _EnterOTPState extends State<EnterOTP> {
       },
     );
   }
-
+  Future<void> getInfo()async{
+    final PackageInfo _info=await PackageInfo.fromPlatform();
+    setState(() {
+      _version='${_info.version}.${_info.buildNumber}';
+    });
+  }
 
 
   @override
@@ -74,6 +84,7 @@ class _EnterOTPState extends State<EnterOTP> {
     // TODO: implement initState
 
     super.initState();
+    getInfo();
 /*
     pushNotificationService.initialise().then((value) {
       setState(() {
@@ -92,7 +103,6 @@ class _EnterOTPState extends State<EnterOTP> {
 
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -175,6 +185,7 @@ class _EnterOTPState extends State<EnterOTP> {
     }
 
   Future<void> _registerOTP() async {
+
     setState(() {
       _progress=true;
     });
@@ -199,9 +210,10 @@ class _EnterOTPState extends State<EnterOTP> {
         "DeviceKey": _device_id,
         "Os": os_id.toString(),
         "RegisterCode":_otp.text,
-        "FcmKey": _fcmKey
-
+        "FcmKey": _fcmKey,
+        "Version": _version
       });
+
       if(result.statusCode==200){
         var res=json.decode(result.body);
         if(res['ResponseCode']==0)

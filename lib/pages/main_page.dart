@@ -1,15 +1,16 @@
 import 'dart:async';
-import 'dart:convert';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'dart:io';
 import 'dart:math';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pardakht_parto/components/maintemplate.dart';
+import 'package:pardakht_parto/custom_widgets/cust_alert_dialog.dart';
+import 'package:pardakht_parto/custom_widgets/cust_button.dart';
 import 'package:pardakht_parto/pages/recipt.dart';
-//import 'package:pardakht_parto/push_notifications.dart';
 import 'package:pardakht_parto/ui/cust_colors.dart';
 import 'package:pardakht_parto/classes/wallet.dart';
 import 'package:uni_links2/uni_links.dart';
@@ -34,8 +35,11 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Uri _latestUri;
   Object _err;
   StreamSubscription _sub;
+  String _test='0';
+
   /// Handle incoming links - the ones that the app will recieve from the OS
   /// while already started.
+
   void _handleIncomingLinks() {
     if (!kIsWeb) {
       // It will handle app links while the app is already started - be it in
@@ -93,7 +97,24 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   bool _hasMessage=false;
 
-
+  checkForInitialMessage() async {
+    await Firebase.initializeApp();
+    RemoteMessage initialMessage =
+    await FirebaseMessaging.instance.getInitialMessage();
+    setState(() {
+      _test="Checking";
+    });
+    if (initialMessage != null) {
+      setState(() {
+        _test='TRUE';
+      });
+Navigator.of(context).pushNamed('/notifications');
+    }else{
+      setState(() {
+        _test="FALSE";
+      });
+    }
+  }
 
 
   @override
@@ -106,10 +127,72 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     // TODO: implement initState
+    checkForInitialMessage();
+
     setWalletAmount(this);
     super.initState();
     _handleIncomingLinks();
     _handleInitialUri();
+    FirebaseMessaging.onMessage.listen((event) {
+      showDialog(context: context, builder: (context) {
+        return CAlertDialog(
+          content: '${event.notification.title}',
+          subContent: '${event.notification.body}',
+          buttons: [CButton(
+            minWidth: 60,
+
+            label: 'بستن',
+            onClick: (){
+              Navigator.of(context).pop();
+            },
+          ),
+            CButton(
+              label: 'پیام ها',
+              minWidth: 60,
+              onClick: (){
+                Navigator.of(context).pushNamed('/notifications');
+              },
+            ),
+
+          ],
+        );
+      },);
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+
+        showDialog(context: context, builder: (context) {
+          return
+            CAlertDialog(
+            content: '${event.notification.title}',
+            subContent: '${event.notification.body}',
+            buttons: [
+              CButton(
+              label: 'بستن',
+              minWidth:60,
+              onClick: (){
+                Navigator.of(context).pop();
+              },
+            ),
+              CButton(
+                label: 'پیام ها',
+                minWidth:60,
+                onClick: (){
+                  Navigator.of(context).pushNamed('/notifications');
+                },
+              ),
+
+            ],
+          );
+        },);
+
+    });
+/*
+    FirebaseMessaging.onBackgroundMessage((message) =>
+    Navigator.of(context).pushNamed('/notifications')
+    );
+*/
+
+
   }
   @override
   Widget build(BuildContext context) {
@@ -145,6 +228,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                     image: AssetImage('assets/images/donation2.png'),
                       onPress: ()=>Navigator.of(context).pushNamed('/donation')
                   ),
+                 // Text('$_test')
 
 
 
