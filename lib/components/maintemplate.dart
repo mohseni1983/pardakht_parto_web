@@ -168,7 +168,7 @@ class _MasterTemplateState extends State<MasterTemplate> with TickerProviderStat
                               width: 90,
                             ),
                             GestureDetector(
-                              onTap: (){},
+                              onTap: (){Navigator.of(context).pushNamed('/support');},
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,

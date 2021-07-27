@@ -20,6 +20,7 @@ import 'package:pardakht_parto/pages/notifications.dart';
 import 'package:pardakht_parto/pages/profile.dart';
 import 'package:pardakht_parto/pages/recipt.dart';
 import 'package:pardakht_parto/pages/registeration.dart';
+import 'package:pardakht_parto/pages/support.dart';
 import 'package:pardakht_parto/pages/test.dart';
 import 'package:pardakht_parto/pages/wallet.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -163,7 +164,9 @@ void main() async {
             '/donation':(context)=>DonationPage(),
             '/notifications':(context)=>NotificationsPage(),
             //ReciptPage.routeName:(context)=>ReciptPage(key: Key(Random(10000).toString()),)
-            '/test':(context)=>TestPage()
+            //'/test':(context)=>TestPage()
+            '/support':(context)=>SupportPage()
+
           },
           initialRoute:
           '/intro',
