@@ -1,5 +1,5 @@
 String globWalletAmount="-";
 bool isWalletAmountUpdating=false;
 String fcmKey='';
-String srvUrl='https://api.partopay.app';
+String srvUrl='http://api.partopay.app';
 //${globalVars.srvUrl}

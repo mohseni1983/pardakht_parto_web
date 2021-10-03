@@ -94,7 +94,7 @@ class _WalletWidgetState extends State<WalletWidget> with TickerProviderStateMix
                 ),
 
               ),
-              Text('موجودی (تومان)',textScaleFactor: 0.8,),
+              Text('موجودی (تومان)',textScaleFactor: 0.7,),
               Container(
                 padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class _WalletWidgetState extends State<WalletWidget> with TickerProviderStateMix
 
 
                               child: GestureDetector(
-                                child: Icon(Icons.add,color: Colors.white,size: 18,),
+                                child: Icon(Icons.add,color: Colors.white,size: 16,),
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => WalletPage(),));
 
@@ -142,7 +142,7 @@ class _WalletWidgetState extends State<WalletWidget> with TickerProviderStateMix
 
 
                               child: GestureDetector(
-                                child: isWalletAmountUpdating?CircularProgressIndicator():Icon(Icons.refresh,color: Colors.white,size: 18,),
+                                child: isWalletAmountUpdating?CircularProgressIndicator():Icon(Icons.refresh,color: Colors.white,size: 16,),
                                 onTap: () async{
 
                                   await setWalletAmount();
