@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:contact_picker/contact_picker.dart';
+//import 'package:contact_picker/contact_picker.dart';
 import 'package:pardakht_parto/classes/convert.dart';
 import 'package:pardakht_parto/classes/wallet_trans.dart';
 import 'package:pardakht_parto/components/maintemplate_withoutfooter.dart';
@@ -726,6 +726,7 @@ class _WalletPageState extends State<WalletPage> {
     this.dispose();
   }
 
+/*
   Future<String> getContact() async {
     final ContactPicker _contactPicker = new ContactPicker();
     String _phoneNumber = '';
@@ -740,6 +741,7 @@ class _WalletPageState extends State<WalletPage> {
     }
     return _phoneNumber;
   }
+*/
 }
 
 class TransactionType {

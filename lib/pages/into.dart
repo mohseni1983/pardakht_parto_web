@@ -1,11 +1,11 @@
 //import 'dart:html';
 import 'dart:async';
-import 'dart:io';
+//import 'dart:io';
 import 'dart:math';
-import 'package:check_vpn_connection/check_vpn_connection.dart';
+//import 'package:check_vpn_connection/check_vpn_connection.dart';
 import 'package:flutter/services.dart';
 import 'package:pardakht_parto/pages/recipt.dart';
-import 'package:root_access/root_access.dart';
+//import 'package:root_access/root_access.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ import 'package:pardakht_parto/pages/main_page.dart';
 import 'package:pardakht_parto/ui/cust_colors.dart';
 import 'package:pardakht_parto/classes/auth.dart' as auth;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity/connectivity.dart';
+//import 'package:connectivity/connectivity.dart';
 import 'package:package_info/package_info.dart';
 import 'package:uni_links2/uni_links.dart';
 
@@ -83,13 +83,16 @@ class _IntroPageState extends State<IntroPage> {
 
   //final FirebaseMessaging _firebaseMessaging;
 
+/*
    Future<bool> isDeviceRoot() async{
      if(Platform.isAndroid){
        return await RootAccess.rootAccess;
      }else
      return false;
    }
+*/
 
+/*
    Future<bool> isInternetConnected() async {
      var status= await Connectivity().checkConnectivity();
      if(status==ConnectivityResult.none){
@@ -98,10 +101,13 @@ class _IntroPageState extends State<IntroPage> {
        return true;
      }
    }
+*/
 
+/*
    Future<bool> isVpnConnected() async {
      return await CheckVpnConnection.isVpnActive();
    }
+*/
   Future<void> getInfo()async{
     final PackageInfo _info=await PackageInfo.fromPlatform();
     setState(() {
@@ -120,96 +126,12 @@ class _IntroPageState extends State<IntroPage> {
 
    /* initPlatformState();*/
     getInfo();
-    isDeviceRoot().then((rooted) {
-      if(rooted){
-        showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          // false = user must tap button, true = tap outside dialog
-          builder: (BuildContext dialogContext) {
-            return CAlertDialog(
-              content: 'خطای مهم',
-              subContent: 'گوشی شما دارای دسترسی روت می باشد. برای استفاده از اپ گپشی نباید روت باشد',
-              buttons: [
-                CButton(
-                  label: 'خروج',
-                  onClick: (){
-                    exit(0);
-                  },
-                )
-              ],
-            );
-          },
-        ).then((value) => exit(0));
-      }else{
-        isVpnConnected().then((vpn) {
-          if(vpn){
-            showDialog<void>(
-              context: context,
-              barrierDismissible: false,
-              // false = user must tap button, true = tap outside dialog
-              builder: (BuildContext dialogContext) {
-                return CAlertDialog(
-                  content: 'خطای مهم',
-                  subContent: 'شما در حال استفاده از VPN هستید. لطفا وی پی ان را قطع نمایید.',
-                  buttons: [
-                    CButton(
-                      label: 'خروج',
-                      onClick: (){
-                        exit(0);
-                      },
-                    )
-                  ],
-                );
-              },
-            ).then((value) => exit(0));
-          } else{
-            isInternetConnected().then((connected) async {
-              if(!connected){
-                showDialog<void>(
-                  context: context,
-                  barrierDismissible: false,
-                  // false = user must tap button, true = tap outside dialog
-                  builder: (BuildContext dialogContext) {
-                    return CAlertDialog(
-                      content: 'خطای مهم',
-                      subContent: 'اتصال اینترنت گوشی برقرار نمی باشد.',
-                      buttons: [
-                        CButton(
-                          label: 'خروج',
-                          onClick: (){
-                            exit(0);
-                          },
-                        )
-                      ],
-                    );
-                  },
-                ).then((value) => exit(0));
-
-              }else{
-                //_firebaseMessaging.requestNotificationPermissions();
-              //  _firebaseMessaging.getToken().then((value) {
-              //    debugPrint('Token FCB=$value');
-
-/*
-           FirebaseMessaging.instance.getToken().then((res){
-             print(res);
-             _prefs.then((x) {
-               x.setString('fcmKey', res);
-             });
-           } );
-*/
-                //var tt=await messaging.getToken();
-
-
-
-          //      });
-                auth.checkAuth().then((value) async {
-                  // Future<SharedPreferences> _prefs=SharedPreferences.getInstance();
-                  Future.delayed(Duration(seconds: 3)).then((s) {
-                    if(value){
-                     // debugPrint(_latestLink);
-                      /*if(_latestLink!=null ){
+    auth.checkAuth().then((value) async {
+      // Future<SharedPreferences> _prefs=SharedPreferences.getInstance();
+      Future.delayed(Duration(seconds: 3)).then((s) {
+        if(value){
+          // debugPrint(_latestLink);
+          /*if(_latestLink!=null ){
                         if( !_latestLink.endsWith('Unknown')  )
                         {
                           debugPrint(_latestLink);
@@ -217,17 +139,11 @@ class _IntroPageState extends State<IntroPage> {
                           _latestLink=null;
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ReciptPage(url: link,key: Key(Random(10000).toString()),),));
                         }}else*/
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainPage(),));
-                    }else{
-                      Navigator.of(context).pushReplacementNamed('/register');
-                    }
-                  });
-                });
-              }
-            });
-          }
-        });
-      }
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MainPage(),));
+        }else{
+          Navigator.of(context).pushReplacementNamed('/register');
+        }
+      });
     });
 
 

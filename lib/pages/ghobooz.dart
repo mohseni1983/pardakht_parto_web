@@ -3,7 +3,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
 //import 'package:barcode_scan_fork/barcode_scan_fork.dart';
 import 'package:pardakht_parto/classes/global_variables.dart' as globalVars;
-import 'package:contact_picker/contact_picker.dart';
+//import 'package:contact_picker/contact_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -547,6 +547,7 @@ String getOrg(int id){
 
   }
 
+/*
   Future<String> getContact() async {
     final ContactPicker _contactPicker = new ContactPicker();
     String _phoneNumber=' +*-';
@@ -561,6 +562,7 @@ String getOrg(int id){
     }
     return _phoneNumber;
   }
+*/
 
 
   Future<List<BillBookmark>> getFavorite() async{
@@ -1067,6 +1069,7 @@ String getOrg(int id){
                     },
                   ),
 
+/*
                   GestureDetector(
                     child: Container(
 
@@ -1094,6 +1097,7 @@ String getOrg(int id){
 
                     },
                   )
+*/
                 ],
               ),
               Row(
@@ -1209,6 +1213,7 @@ String getOrg(int id){
                       });
                     },
                   ),
+/*
                   GestureDetector(
                     child: Container(
 
@@ -1236,6 +1241,7 @@ String getOrg(int id){
 
                     },
                   )
+*/
                 ],
               ),
               Row(

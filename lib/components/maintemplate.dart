@@ -9,7 +9,7 @@ import 'package:pardakht_parto/pages/main_page.dart';
 import 'package:pardakht_parto/pages/profile.dart';
 import 'package:pardakht_parto/pages/wallet.dart';
 
-import 'TopWallet.dart';
+import 'top_wallet.dart';
 class MasterTemplate extends StatefulWidget {
   final Widget wchild;
   final hasMessage;

@@ -2,17 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:contact_picker/contact_picker.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+//import 'package:contact_picker/contact_picker.dart';
 import 'package:pardakht_parto/classes/convert.dart';
-import 'package:pardakht_parto/classes/global_variables.dart';
 import 'package:pardakht_parto/classes/topup.dart';
 import 'package:pardakht_parto/classes/wallet.dart';
 import 'package:pardakht_parto/components/maintemplate_withoutfooter.dart';
 import 'package:pardakht_parto/custom_widgets/cust_alert_dialog.dart';
 import 'package:pardakht_parto/custom_widgets/cust_button.dart';
 import 'package:pardakht_parto/custom_widgets/cust_pre_invoice.dart';
-import 'package:pardakht_parto/custom_widgets/cust_pre_invoice_dialog.dart';
 import 'package:pardakht_parto/custom_widgets/cust_selectable_buttonbar.dart';
 import 'package:pardakht_parto/custom_widgets/cust_seletable_grid_item.dart';
 import 'package:pardakht_parto/ui/cust_colors.dart';
@@ -973,6 +970,7 @@ class _ChargeWizardPageState extends State<ChargeWizardPage> {
                                   },
                                   textAlign: TextAlign.center,
                                 )),
+/*
                                 GestureDetector(
                                   child: Container(
                                     margin: EdgeInsets.only(right: 5),
@@ -998,6 +996,7 @@ class _ChargeWizardPageState extends State<ChargeWizardPage> {
                                     });
                                   },
                                 )
+*/
                               ],
                             ),
                             Divider(
@@ -1291,6 +1290,7 @@ class _ChargeWizardPageState extends State<ChargeWizardPage> {
     super.initState();
   }
 
+/*
   Future<String> getContact() async {
     final ContactPicker _contactPicker = new ContactPicker();
     String _phoneNumber = '';
@@ -1305,6 +1305,7 @@ class _ChargeWizardPageState extends State<ChargeWizardPage> {
     }
     return _phoneNumber;
   }
+*/
 
   Future<void> getLastPurchase() async {
     setState(() {

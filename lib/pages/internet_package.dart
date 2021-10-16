@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:contact_picker/contact_picker.dart';
+//import 'package:contact_picker/contact_picker.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:pardakht_parto/Pages/internet_package_list.dart';
 import 'package:pardakht_parto/Pages/main_page.dart';
@@ -366,6 +366,7 @@ class _InternetPackagePageState extends State<InternetPackagePage> {
                                             textAlign: TextAlign.center,
                                           )
                                       ),
+/*
                                       GestureDetector(
                                         child: Container(
                                           margin: EdgeInsets.only(right: 5),
@@ -392,6 +393,7 @@ class _InternetPackagePageState extends State<InternetPackagePage> {
                                           });
                                         },
                                       )
+*/
                                     ],
                                   ),
                                   Divider(
@@ -659,6 +661,7 @@ class _InternetPackagePageState extends State<InternetPackagePage> {
 
 
 
+/*
   Future<String> getContact() async {
     final ContactPicker _contactPicker = new ContactPicker();
     String _phoneNumber='';
@@ -673,4 +676,5 @@ class _InternetPackagePageState extends State<InternetPackagePage> {
     }
     return _phoneNumber;
   }
+*/
 }

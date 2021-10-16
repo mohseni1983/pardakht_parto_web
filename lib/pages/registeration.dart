@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:device_info/device_info.dart';
+//import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +25,7 @@ class _RegisterationPageState extends State<RegisterationPage> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   bool _progressing = false;
   TextEditingController _mobile = new TextEditingController();
-  DeviceInfoPlugin plugin = new DeviceInfoPlugin();
+ // DeviceInfoPlugin plugin = new DeviceInfoPlugin();
   String _deviceId = '---';
   int os_id = 0;
   TextEditingController _referrer = new TextEditingController();
@@ -35,7 +35,7 @@ class _RegisterationPageState extends State<RegisterationPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    try {
+/*    try {
       if (Platform.isAndroid) {
         plugin.androidInfo.then((value) {
           setState(() {
@@ -57,7 +57,12 @@ class _RegisterationPageState extends State<RegisterationPage> {
       setState(() {
         _deviceId = 'Error';
       });
-    }
+    }*/
+    setState(() {
+      os_id=3;
+      _deviceId='test_id_for_web';
+
+    });
     _prefs.then((value) {
       var _sign = value.getString('sign');
 
